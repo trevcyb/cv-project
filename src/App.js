@@ -2,6 +2,8 @@ import { Component } from "react";
 import Education from "./components/Education";
 import Exp from './components/Exp';
 import uniqid from 'uniqid';
+import Skills from "./components/Skills";
+import "./styles/App.css";
 
 class App extends Component {
   constructor() {
@@ -18,6 +20,9 @@ class App extends Component {
       emailsaved: "",
       locationsaved: "",
       contactsaved: "",
+      showHideform: false,
+      showHidebtn: true,
+      showHideEditbtn: false,
     }
   }
 
@@ -63,17 +68,51 @@ class App extends Component {
       email: "",
       location: "",
       contact: "",
+      showHideEditbtn: !this.state.showHideEditbtn,
+      showHideform: !this.state.showHideform,
+    })
+  }
+
+  toggleForm = () => {
+    this.setState({
+      showHideform: !this.state.showHideform,
+      showHidebtn: !this.state.showHidebtn,
+    })
+  }
+
+  editForm = () => {
+    this.setState({
+      fname: this.state.fnamesaved,
+      lname: this.state.lnamesaved,
+      email: this.state.emailsaved,
+      location: this.state.locationsaved,
+      contact: this.state.contactsaved,
+      showHideform: !this.state.showHideform,
+      showHideEditbtn: !this.state.showHideEditbtn,
+    })
+  }
+
+  cancelForm = () => {
+    this.setState({
+      fname: "",
+      lname: "",
+      email: "",
+      location: "",
+      contact: "",
+      showHideform: !this.state.showHideform,
+      showHideEditbtn: !this.state.showHideEditbtn,
     })
   }
 
 
   render() {
-    const { fname, lname, email, location, contact, fnamesaved, lnamesaved } = this.state;
+    const { fname, lname, email, location, contact, fnamesaved, lnamesaved, showHideform, showHideEditbtn, showHidebtn } = this.state;
 
     return (
-      <div>
+      <div id="appDiv">
         <header>My Resume Builder</header>
-        <form>
+        {showHideform && (
+        <form id="nameForm" className="resForm">
           <input
             type="text"
             placeholder="First Name"
@@ -108,11 +147,27 @@ class App extends Component {
             value={contact}
             onChange={this.contactChange}
           ></input>
-          <button type="button" onClick={this.saveSection}>Save</button>
+
+          <button type="button" onClick={this.saveSection} className="formBtn">Save</button>
+
+          <button type="button" onClick={this.cancelForm} className="formBtn">Cancel</button>
+
         </form>
+        )}
+
         <h2 key={uniqid()}>{fnamesaved}{lnamesaved}</h2>
+
+        {showHidebtn && (
+        <button type="button" className="formBtn" onClick={this.toggleForm}>Add Personal Info</button>
+        )}
+
+        {showHideEditbtn && (
+          <button type="button" className="formBtn" onClick={this.editForm}>Edit Personal Info</button>
+        )}
+
         <Exp />
         <Education />
+        <Skills />
       </div>
     )
   }

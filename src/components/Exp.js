@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import uniqid from "uniqid";
 
 class job {
-    constructor( position, company, yearstart, yearend, description ) {
+    constructor(position, company, yearstart, yearend, description) {
         this.position = position;
         this.company = company;
         this.yearstart = yearstart;
@@ -23,6 +23,9 @@ class Exp extends Component {
             description: "",
             jobid: 0,
             jobs: [],
+            showHideform: false,
+            showHidebtn: true,
+            showHideEditbtn: false,
         }
     }
 
@@ -64,15 +67,49 @@ class Exp extends Component {
             yearstart: "",
             yearend: "",
             description: "",
+            showHideform: !this.state.showHideform,
+            showHideEditbtn: !this.state.showHideEditbtn,
+        })
+    }
+
+    toggleForm = () => {
+        this.setState({
+            showHideform: !this.state.showHideform,
+            showHidebtn: !this.state.showHidebtn,
+        })
+    }
+
+    editForm = () => {
+        this.setState({
+            fname: this.state.fnamesaved,
+            lname: this.state.lnamesaved,
+            email: this.state.emailsaved,
+            location: this.state.locationsaved,
+            contact: this.state.contactsaved,
+            showHideform: !this.state.showHideform,
+            showHideEditbtn: !this.state.showHideEditbtn,
+        })
+    }
+
+    cancelForm = () => {
+        this.setState({
+            position: "",
+            company: "",
+            yearstart: "",
+            yearend: "",
+            description: "",
+            showHideform: !this.state.showHideform,
+            showHideEditbtn: !this.state.showHideEditbtn,
         })
     }
 
     render() {
-        const { position, company, yearstart, yearend, description, jobs } = this.state;
+        const { position, company, yearstart, yearend, description, jobs, showHideform, showHideEditbtn, showHidebtn } = this.state;
 
         return (
             <div>
-                <form>
+                {showHideform && (
+                <form id="expForm" className="resForm">
                     <input
                         type="text"
                         placeholder="Enter the Position Name"
@@ -109,16 +146,20 @@ class Exp extends Component {
                         onChange={this.descriptionChange}>
                     </input>
                     <button type="button" onClick={this.saveSection}>Save Work Experience</button>
+                    <button type="button" onClick={this.cancelForm}>Cancel</button>
                 </form>
+                )}
+                <button type="button" onClick={this.toggleForm}>Add New Work Experience</button>
                 <div>
                     {jobs.map(job => {
-                        return(
+                        return (
                             <div key={uniqid()}>
-                            <h2>Position: {job.position}</h2>
-                            <h2>Company: {job.company}</h2>
-                            <h4>Starting Year: {job.yearstart}</h4>
-                            <h4>Ending Year: {job.yearend}</h4>
-                            <h4>Description: {job.description}</h4>
+                                <h2>Position: {job.position}</h2>
+                                <h2>Company: {job.company}</h2>
+                                <h4>Starting Year: {job.yearstart}</h4>
+                                <h4>Ending Year: {job.yearend}</h4>
+                                <h4>Description: {job.description}</h4>
+                                <button className="formBtn">Edit Job</button>
                             </div>
                         )
                     })}

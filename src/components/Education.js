@@ -73,7 +73,7 @@ class Education extends Component {
 
         return (
             <div>
-                <form>
+                <form id="eduForm" className="resForm">
                     <input
                         type="text"
                         placeholder="Enter the Institution Name"
