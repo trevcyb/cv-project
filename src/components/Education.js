@@ -1,3 +1,4 @@
+import { findAllByTestId } from "@testing-library/react";
 import React, { Component } from "react";
 import uniqid from "uniqid";
 
@@ -25,9 +26,11 @@ class Education extends Component {
       schoolid: 0,
       editid: 0,
       showHideform: false,
-      showHidebtn: true,
-      showHideEditbtn: true,
-      showHideSaveEditbtn: false
+      showHideAddbtn: true,
+      showHideSaveEdubtn: false,
+      showHideEditEdubtn: false,
+      showHideSaveEditbtn: false,
+      showHideCancelbtn: false
     };
   }
 
@@ -79,15 +82,21 @@ class Education extends Component {
       yearend: "",
       gpa: "",
       schoolid: this.state.schoolid + 1,
-      showHideform: !this.state.showHideform,
-      showHideEditbtn: !this.state.showHideEditbtn
+      showHideform: false,
+      showHideEditEdubtn: true,
+      showHideCancelbtn: false,
+      showHideEditEdubtn: false,
+      showHideAddbtn: true,
+      showHideSaveEdubtn: false
     });
   };
 
   toggleForm = () => {
     this.setState({
-      showHideform: !this.state.showHideform,
-      showHidebtn: !this.state.showHidebtn
+      showHideform: true,
+      showHideAddbtn: false,
+      showHideSaveEdubtn: true,
+      showHideCancelbtn: true
     });
   };
 
@@ -109,9 +118,12 @@ class Education extends Component {
         e.target.parentElement.id
       ],
       editid: e.target.parentElement.id,
-      showHideform: !this.state.showHideform,
-      showHideEditbtn: !this.state.showHideEditbtn,
-      showHideSaveEditbtn: !this.state.showHideSaveEditbtn
+      showHideform: true,
+      showHideEditEdubtn: false,
+      showHideSaveEditbtn: true,
+      showHideAddbtn: false,
+      showHideCancelbtn: true,
+      showHideSaveEdubtn: false
     });
   };
 
@@ -129,7 +141,12 @@ class Education extends Component {
 
     this.setState({
       schools: newArray,
-      showHideSaveEditbtn: !this.state.showHideSaveEditbtn
+      showHideSaveEditbtn: false,
+      showHideAddbtn: true,
+      showHideEditEdubtn: true,
+      showHideCancelbtn: false,
+      showHideform: false,
+      showHideSaveEdubtn: false
     });
   };
 
@@ -140,8 +157,11 @@ class Education extends Component {
       yearstart: "",
       yearend: "",
       gpa: "",
-      showHideform: !this.state.showHideform,
-      showHideEditbtn: !this.state.showHideEditbtn
+      showHideform: false,
+      showHideEditEdubtn: true,
+      showHideAddbtn: true,
+      showHideCancelbtn: false,
+      showHideSaveEdubtn: false
     });
   };
 
@@ -155,8 +175,10 @@ class Education extends Component {
       schools,
       schoolid,
       showHideform,
-      showHideEditbtn,
-      showHideSaveEditbtn
+      showHideSaveEditbtn,
+      showHideAddbtn,
+      showHideCancelbtn,
+      showHideSaveEdubtn
     } = this.state;
 
     return (
@@ -203,14 +225,16 @@ class Education extends Component {
                 Save Edit
               </button>
             )}
-            {showHideEditbtn && (
+            {showHideSaveEdubtn && (
               <button type="button" onClick={this.saveSection}>
                 Save Education
               </button>
             )}
-            <button type="button" onClick={this.cancelForm}>
-              Cancel
-            </button>
+            {showHideCancelbtn && (
+              <button type="button" onClick={this.cancelForm}>
+                Cancel
+              </button>
+            )}
           </form>
         )}
         <div>
@@ -228,9 +252,11 @@ class Education extends Component {
               </div>
             );
           })}
-          <button type="button" onClick={this.toggleForm}>
-            Add New Education
-          </button>
+          {showHideAddbtn && (
+            <button type="button" onClick={this.toggleForm}>
+              Add New Education
+            </button>
+          )}
         </div>
       </div>
     );
