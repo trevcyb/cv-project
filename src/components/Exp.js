@@ -81,11 +81,11 @@ class Exp extends Component {
 
     editForm = () => {
         this.setState({
-            fname: this.state.fnamesaved,
-            lname: this.state.lnamesaved,
-            email: this.state.emailsaved,
-            location: this.state.locationsaved,
-            contact: this.state.contactsaved,
+            position: "",
+            company: "",
+            yearstart: "",
+            yearend: "",
+            description: "",
             showHideform: !this.state.showHideform,
             showHideEditbtn: !this.state.showHideEditbtn,
         })
@@ -149,7 +149,6 @@ class Exp extends Component {
                     <button type="button" onClick={this.cancelForm}>Cancel</button>
                 </form>
                 )}
-                <button type="button" onClick={this.toggleForm}>Add New Work Experience</button>
                 <div>
                     {jobs.map(job => {
                         return (
@@ -159,10 +158,11 @@ class Exp extends Component {
                                 <h4>Starting Year: {job.yearstart}</h4>
                                 <h4>Ending Year: {job.yearend}</h4>
                                 <h4>Description: {job.description}</h4>
-                                <button className="formBtn">Edit Job</button>
+                                <button className="formBtn" onClick={this.editForm}>Edit Job</button>
                             </div>
                         )
                     })}
+                    <button type="button" onClick={this.toggleForm}>Add New Work Experience</button>
                 </div>
             </div>
         )

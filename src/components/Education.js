@@ -22,6 +22,9 @@ class Education extends Component {
             yearend: "",
             gpa: "",
             schools: [],
+            showHideform: false,
+            showHidebtn: true,
+            showHideEditbtn: false,
         }
     };
 
@@ -63,16 +66,51 @@ class Education extends Component {
             yearstart: "",
             yearend: "",
             gpa: "",
+            showHideform: !this.state.showHideform,
+            showHideEditbtn: !this.state.showHideEditbtn,
+        })
+    }
+
+    toggleForm = () => {
+        this.setState({
+            showHideform: !this.state.showHideform,
+            showHidebtn: !this.state.showHidebtn,
+        })
+    }
+
+    editForm = (e) => {
+        this.setState({
+            school: this.state.schools[e.target.parentElement.id][0],
+            prog: "",
+            yearstart: "",
+            yearend: "",
+            gpa: "",
+            showHideform: !this.state.showHideform,
+            showHideEditbtn: !this.state.showHideEditbtn,
+        })
+        console.log(e.target.parentElement.id);
+    }
+
+    cancelForm = () => {
+        this.setState({
+            school: "",
+            prog: "",
+            yearstart: "",
+            yearend: "",
+            gpa: "",
+            showHideform: !this.state.showHideform,
+            showHideEditbtn: !this.state.showHideEditbtn,
         })
     }
 
 
 
     render() {
-        const { school, prog, yearstart, yearend, gpa, schools } = this.state;
+        const { school, prog, yearstart, yearend, gpa, schools, schoolid, showHideform, showHideEditbtn } = this.state;
 
         return (
             <div>
+                {showHideform && (
                 <form id="eduForm" className="resForm">
                     <input
                         type="text"
@@ -110,19 +148,23 @@ class Education extends Component {
                         onChange={this.gpaChange}
                     ></input>
                     <button type="button" onClick={this.saveSection}>Save Education</button>
+                    <button type="button" onClick={this.cancelForm}>Cancel</button>
                 </form>
+                )}
                 <div>
-                    {schools.map((item) => {
+                    {schools.map((item, index) => {
                         return (
-                            <div key={uniqid()}>
+                            <div key={uniqid()} id={index}>
                                 <h2>School: {item.school}</h2>
                                 <h2>Programme: {item.prog}</h2>
                                 <h4>Starting Year: {item.yearstart}</h4>
                                 <h4>Ending Year: {item.yearend}</h4>
                                 <h4>GPA: {item.gpa}</h4>
+                                <button type="button" onClick={this.editForm}>Edit Education</button>
                             </div>
                         )
                     })}
+                    <button type="button" onClick={this.toggleForm}>Add New Education</button>
                 </div>
             </div>
         )
