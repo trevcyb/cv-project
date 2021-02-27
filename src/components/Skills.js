@@ -40,8 +40,13 @@ class Skills extends Component {
                 </form>
                 <button type="button" onClick={this.saveSection}>Save Skill</button>
                 <ul>
-                    {skills.map((item) => {
-                        return <li key={uniqid()}>{item}</li>
+                    {skills.map((item, index) => {
+                        return (
+                            <li key={uniqid()} id={index}>
+                                {item}
+                                <button type="button" className="formBtn">&#10005;</button>
+                            </li>
+                        )
                     })}
                 </ul>
             </div>
