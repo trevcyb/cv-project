@@ -106,64 +106,79 @@ class App extends Component {
 
 
   render() {
-    const { fname, lname, email, location, contact, fnamesaved, lnamesaved, showHideform, showHideEditbtn, showHidebtn } = this.state;
+    const { fname, lname, email, location, contact, fnamesaved, lnamesaved, emailsaved, contactsaved, locationsaved, showHideform, showHideEditbtn, showHidebtn } = this.state;
 
     return (
       <div id="appDiv">
         <header>My Resume Builder</header>
         {showHideform && (
-        <form id="nameForm" className="resForm">
-          <input
-            type="text"
-            placeholder="First Name"
-            id="fnameInput"
-            value={fname}
-            onChange={this.fnameChange}
-          ></input>
-          <input type="text"
-            placeholder="Last Name"
-            id="lnameInput"
-            value={lname}
-            onChange={this.lnameChange}
-          ></input>
-          <input
-            type="text"
-            placeholder="Email"
-            id="emailInput"
-            value={email}
-            onChange={this.emailChange}
-          ></input>
-          <input
-            type="text"
-            placeholder="Location"
-            id="locationInput"
-            value={location}
-            onChange={this.locationChange}
-          ></input>
-          <input
-            type="text"
-            placeholder="Contact"
-            id="contactInput"
-            value={contact}
-            onChange={this.contactChange}
-          ></input>
+          <form id="nameForm" className="resForm">
+            <h3>Personal Info</h3>
+            <label htmlFor="fnameinput" className="formLabel">First Name</label>
+            <input
+              type="text"
+              placeholder="First Name"
+              id="fnameInput"
+              value={fname}
+              onChange={this.fnameChange}
+              className="formInput"
+            ></input>
+            <label htmlFor="lnameInput" className="formLabel">Last Name</label>
+            <input type="text"
+              placeholder="Last Name"
+              id="lnameInput"
+              value={lname}
+              onChange={this.lnameChange}
+              className="formInput"
+            ></input>
+            <label htmlFor="emailInput" className="formLabel">Email</label>
+            <input
+              type="text"
+              placeholder="Email"
+              id="emailInput"
+              value={email}
+              onChange={this.emailChange}
+              className="formInput"
+            ></input>
+            <label htmlFor="locationInput" className="formLabel">Location</label>
+            <input
+              type="text"
+              placeholder="Location"
+              id="locationInput"
+              value={location}
+              onChange={this.locationChange}
+              className="formInput"
+            ></input>
+            <label htmlFor="contactInput" className="formLabel">Contact</label>
+            <input
+              type="text"
+              placeholder="Contact"
+              id="contactInput"
+              value={contact}
+              onChange={this.contactChange}
+              className="formInput"
+            ></input>
 
-          <button type="button" onClick={this.saveSection} className="formBtn">Save</button>
+            <button type="button" onClick={this.saveSection} className="formBtn">Save</button>
 
-          <button type="button" onClick={this.cancelForm} className="formBtn">Cancel</button>
+            <button type="button" onClick={this.cancelForm} className="formBtn">Cancel</button>
 
-        </form>
+          </form>
         )}
+        <div className="displayDiv" key={uniqid()}>
+          <h2>Name: {fnamesaved} {lnamesaved}</h2>
+          <h4>Email: {emailsaved}</h4>
+          <h4>Location: {locationsaved}</h4>
+          <h4>Contact: {contactsaved}</h4>
 
-        <h2 key={uniqid()}>{fnamesaved}{lnamesaved}</h2>
+          {showHidebtn && (
+            <button type="button" className="formBtn" onClick={this.toggleForm}>Add Personal Info</button>
+          )}
 
-        {showHidebtn && (
-        <button type="button" className="formBtn" onClick={this.toggleForm}>Add Personal Info</button>
-        )}
-
-        {showHideEditbtn && (
-          <button type="button" className="formBtn" onClick={this.editForm}>Edit Personal Info</button>
-        )}
+          {showHideEditbtn && (
+            <button type="button" className="formBtn" onClick={this.editForm}>Edit Personal Info</button>
+          )}
+        </div>
 
         <Exp />
         <Education />

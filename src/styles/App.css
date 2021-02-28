@@ -1,14 +1,74 @@
+html {
+    background-color: darkslategray;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 header {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;
     text-align: center;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 #appDiv {
     margin: auto;
     width: 50%;
-    border: 3px solid black;
+    border: 3px solid white;
     border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+button {
+    display: inline-block;
+    z-index: 2;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    transition: ease 0.5s;
+    background-color: whitesmoke;
+    color: black;
+}
+
+.displayDiv {
+    border-bottom: 2px solid white;
+    border-top: 2px solid white;
+}
+
+.formInput {
+    width: 100%;
+}
+
+input {
+    outline: none;
+    background-color: grey;
+    color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input::placeholder {
+    color: white;
+}
+
+.formLabel {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#description {
+    height: 200px;
 }
 

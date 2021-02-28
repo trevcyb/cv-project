@@ -218,6 +218,7 @@ class Education extends Component {
             <div>
                 {showHideform && (
                     <form id="eduForm" className="resForm">
+                        <h3>Education</h3>
                         <input
                             type="text"
                             placeholder="Enter the Institution Name"

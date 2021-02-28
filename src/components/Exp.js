@@ -203,39 +203,50 @@ class Exp extends Component {
             <div>
                 {showHideform && (
                     <form id="expForm" className="resForm">
+                        <h3>Work Experience</h3>
+                        <label htmlFor="positionName">Position</label>
                         <input
                             type="text"
                             placeholder="Enter the Position Name"
                             id="positionName"
                             value={position}
-                            onChange={this.positionChange}>
+                            onChange={this.positionChange}
+                            className="formInput">
                         </input>
+                        <label htmlFor="companyName">Company</label>
                         <input
                             type="text"
                             placeholder="Enter the Company"
                             id="companyName"
                             value={company}
+                            className="formInput"
                             onChange={this.companyChange}>
                         </input>
+                        <label htmlFor="yearStart">Starting Year</label>
                         <input
                             type="text"
                             placeholder="Enter the starting year"
                             id="yearStart"
                             value={yearstart}
+                            className="formInput"
                             onChange={this.yearstartChange}>
                         </input>
+                        <label htmlFor="yearEnd">Ending Year</label>
                         <input
                             type="text"
                             placeholder="Enter the ending year"
                             id="yearEnd"
                             value={yearend}
+                            className="formInput"
                             onChange={this.yearendChange}>
                         </input>
+                        <label htmlFor="description">Description</label>
                         <input
                             type="text"
                             placeholder="Enter a summary of your duties"
                             id="description"
                             value={description}
+                            className="formInput"
                             onChange={this.descriptionChange}>
                         </input>
                         {showHideSaveEditbtn && (
